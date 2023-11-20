@@ -1,7 +1,8 @@
 from flask import request, jsonify
 
 from app import app
-from app.services.customer_service import get_all_customers, create_customer, update_customer, delete_customer
+from app.services.customer_service import get_all_customers, create_customer, update_customer, delete_customer, \
+    get_customer_orders
 
 
 @app.route('/customers', methods=['GET'])
@@ -28,3 +29,13 @@ def modify_customer(id):
 def remove_customer(id):
     result = delete_customer(id)
     return jsonify(result)
+
+
+@app.route('/customers/<int:id>/orders', methods=['GET'])
+def get_orders_for_customer(id):
+    customer = get_customer_orders(id)
+    if not customer:
+        return jsonify({'message': 'Customer not found'}), 404
+
+    orders = customer['orders']
+    return jsonify({'customer': customer, 'orders': orders})

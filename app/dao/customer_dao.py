@@ -37,3 +37,13 @@ def delete_customer_dao(id):
     db.session.delete(customer)
     db.session.commit()
     return {'message': 'Customer deleted successfully'}
+
+
+def get_customer_orders_dao(id):
+    customer = Customer.query.get(id)
+    if not customer:
+        return None
+
+    orders = [{'id': order.id, 'date': order.date, 'price': float(order.price)} for order in customer.orders]
+    return {'id': customer.id, 'first_name': customer.first_name, 'last_name': customer.last_name,
+            'phone_number': customer.phone_number, 'orders': orders}

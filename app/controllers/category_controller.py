@@ -1,7 +1,8 @@
 from flask import request, jsonify
 
 from app import app
-from app.services.category_service import get_all_categories, create_category, update_category, delete_category
+from app.services.category_service import get_all_categories, create_category, update_category, delete_category, \
+    get_category_by_name
 
 
 @app.route('/categories', methods=['GET'])
@@ -28,3 +29,13 @@ def modify_category(name):
 def remove_category(name):
     result = delete_category(name)
     return jsonify(result)
+
+
+@app.route('/categories/<string:name>/drugs', methods=['GET'])
+def get_drugs_by_category(name):
+    category = get_category_by_name(name)
+    if not category:
+        return jsonify({'message': 'Category not found'}), 404
+
+    drugs = category['drugs']
+    return jsonify({'category': category, 'drugs': drugs})

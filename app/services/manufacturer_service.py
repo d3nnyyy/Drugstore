@@ -16,3 +16,7 @@ def update_manufacturer(id, data):
 
 def delete_manufacturer(id):
     return delete_manufacturer_dao(id)
+
+
+def get_manufacturer_by_id(id):
+    return get_manufacturer_by_id_dao(id)

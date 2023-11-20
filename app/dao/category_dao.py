@@ -32,3 +32,12 @@ def delete_category_dao(name):
     db.session.delete(category)
     db.session.commit()
     return {'message': 'Category deleted successfully'}
+
+
+def get_category_by_name_dao(name):
+    category = Category.query.get(name)
+    if not category:
+        return None
+
+    drugs = [{'id': drug.id, 'name': drug.name} for drug in category.drugs]
+    return {'name': category.name, 'drugs': drugs}

@@ -38,3 +38,13 @@ def delete_manufacturer_dao(id):
     db.session.delete(manufacturer)
     db.session.commit()
     return {'message': 'Manufacturer deleted successfully'}
+
+
+def get_manufacturer_by_id_dao(id):
+    manufacturer = Manufacturer.query.get(id)
+    if not manufacturer:
+        return None
+
+    drugs = [{'id': drug.id, 'name': drug.name} for drug in manufacturer.drugs]
+    return {'id': manufacturer.id, 'name': manufacturer.name, 'phone_number': manufacturer.phone_number,
+            'email': manufacturer.email, 'address_id': manufacturer.address_id, 'drugs': drugs}

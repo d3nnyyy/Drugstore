@@ -2,11 +2,12 @@ from datetime import datetime
 
 from app import db
 from app.models.models import Order, OrderHasDrug
+from app.dto.order_dto import OrderDTO
 
 
 def get_all_orders_dao():
     orders = Order.query.all()
-    return [{'id': order.id, 'date': order.date, 'price': float(order.price), 'customer_id': order.customer_id} for
+    return [OrderDTO.to_dict(order) for
             order in orders]
 
 
@@ -21,12 +22,7 @@ def create_order_dao(data):
 
     db.session.commit()
 
-    created_order = {
-        {'id': new_order.id, 'date': new_order.date, 'price': float(new_order.price),
-         'customer_id': new_order.customer_id}
-    }
-
-    return created_order
+    return OrderDTO.to_dict(new_order)
 
 
 def update_order_dao(id, data):
@@ -40,8 +36,7 @@ def update_order_dao(id, data):
 
     db.session.commit()
 
-    updated_order = {'id': order.id, 'date': order.date, 'price': float(order.price), 'customer_id': order.customer_id}
-    return updated_order
+    return OrderDTO.to_dict(order)
 
 
 def delete_order_dao(id):

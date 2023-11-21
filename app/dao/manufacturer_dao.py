@@ -1,11 +1,11 @@
 from app import db
+from app.dto.manufacturer_dto import ManufacturerDTO
 from app.models.models import Manufacturer
 
 
 def get_all_manufacturers_dao():
     manufacturers = Manufacturer.query.all()
-    return [{'id': manufacturer.id, 'name': manufacturer.name, 'phone_number': manufacturer.phone_number,
-             'email': manufacturer.email, 'address_id': manufacturer.address_id} for manufacturer in manufacturers]
+    return [ManufacturerDTO.to_dict(manufacturer) for manufacturer in manufacturers]
 
 
 def create_manufacturer_dao(data):
@@ -14,17 +14,7 @@ def create_manufacturer_dao(data):
     db.session.add(new_manufacturer)
     db.session.commit()
 
-    new_manufacturer = {
-
-        'id': new_manufacturer.id,
-        'name': new_manufacturer.name,
-        'phone_number': new_manufacturer.phone_number,
-        'email': new_manufacturer.email,
-        'address_id': new_manufacturer.address_id
-
-    }
-
-    return new_manufacturer
+    return ManufacturerDTO.to_dict(new_manufacturer)
 
 
 def update_manufacturer_dao(id, data):
@@ -39,10 +29,7 @@ def update_manufacturer_dao(id, data):
 
     db.session.commit()
 
-    updated_manufacturer = {'id': manufacturer.id, 'name': manufacturer.name, 'phone_number': manufacturer.phone_number,
-                            'email': manufacturer.email, 'address_id': manufacturer.address_id}
-
-    return updated_manufacturer
+    return ManufacturerDTO.to_dict(manufacturer)
 
 
 def delete_manufacturer_dao(id):

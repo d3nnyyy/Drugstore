@@ -1,11 +1,11 @@
 from app import db
 from app.models.models import Customer
+from app.dto.customer_dto import CustomerDTO
 
 
 def get_all_customers_dao():
     customers = Customer.query.all()
-    return [{'id': customer.id, 'first_name': customer.first_name, 'last_name': customer.last_name,
-             'phone_number': customer.phone_number} for customer in customers]
+    return [CustomerDTO.to_dict(customer) for customer in customers]
 
 
 def create_customer_dao(data):
@@ -14,14 +14,7 @@ def create_customer_dao(data):
     db.session.add(new_customer)
     db.session.commit()
 
-    created_customer = {
-        'id': new_customer.id,
-        'first_name': new_customer.first_name,
-        'last_name': new_customer.last_name,
-        'phone_number': new_customer.phone_number
-    }
-
-    return created_customer
+    return CustomerDTO.to_dict(new_customer)
 
 
 def update_customer_dao(id, data):
@@ -35,10 +28,7 @@ def update_customer_dao(id, data):
 
     db.session.commit()
 
-    updated_customer = {'id': customer.id, 'first_name': customer.first_name, 'last_name': customer.last_name,
-             'phone_number': customer.phone_number}
-
-    return updated_customer
+    return CustomerDTO.to_dict(customer)
 
 
 def delete_customer_dao(id):

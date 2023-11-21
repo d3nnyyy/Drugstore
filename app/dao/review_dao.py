@@ -1,11 +1,11 @@
 from app import db
+from app.dto.review_dto import ReviewDTO
 from app.models.models import Review
 
 
 def get_all_reviews_dao():
     reviews = Review.query.all()
-    return [{'id': review.id, 'comment': review.comment, 'rating': review.rating,
-             'drug_id': review.drug_id, 'customer_id': review.customer_id} for review in reviews]
+    return [ReviewDTO.to_dict(review) for review in reviews]
 
 
 def create_review_dao(data):
@@ -14,10 +14,7 @@ def create_review_dao(data):
     db.session.add(new_review)
     db.session.commit()
 
-    created_review = {'id': new_review.id, 'comment': new_review.comment, 'rating': new_review.rating,
-                      'drug_id': new_review.drug_id, 'customer_id': new_review.customer_id}
-
-    return created_review
+    return ReviewDTO.to_dict(new_review)
 
 
 def update_review_dao(id, data):
@@ -32,10 +29,7 @@ def update_review_dao(id, data):
 
     db.session.commit()
 
-    updated_review = {'id': review.id, 'comment': review.comment, 'rating': review.rating,
-                      'drug_id': review.drug_id, 'customer_id': review.customer_id}
-
-    return updated_review
+    return ReviewDTO.to_dict(review)
 
 
 def delete_review_dao(id):

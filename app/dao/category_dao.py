@@ -1,10 +1,11 @@
 from app import db
 from app.models.models import Category
+from app.dto.category_dto import CategoryDTO
 
 
 def get_all_categories_dao():
     categories = Category.query.all()
-    return [{'name': category.name} for category in categories]
+    return [CategoryDTO.to_dict(category) for category in categories]
 
 
 def create_category_dao(data):
@@ -12,9 +13,7 @@ def create_category_dao(data):
     db.session.add(new_category)
     db.session.commit()
 
-    created_category = {'name': new_category.name}
-
-    return created_category
+    return CategoryDTO.to_dict(new_category)
 
 
 def update_category_dao(name, data):
@@ -25,9 +24,7 @@ def update_category_dao(name, data):
     category.name = data['name']
     db.session.commit()
 
-    updated_category = {'name': category.name}
-
-    return updated_category
+    return CategoryDTO.to_dict(category)
 
 
 def delete_category_dao(name):

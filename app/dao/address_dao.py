@@ -15,11 +15,22 @@ def create_address_dao(data):
                           house_number=data['house_number'])
     db.session.add(new_address)
     db.session.commit()
-    return {'message': 'Address created successfully'}
+
+    created_address = {
+        'id': new_address.id,
+        'country_name': new_address.country_name,
+        'region_name': new_address.region_name,
+        'city_name': new_address.city_name,
+        'street_name': new_address.street_name,
+        'house_number': new_address.house_number
+    }
+
+    return created_address
 
 
 def update_address_dao(id, data):
     address = Address.query.get(id)
+
     if not address:
         return {'message': 'Address not found'}, 404
 
@@ -30,7 +41,17 @@ def update_address_dao(id, data):
     address.house_number = data['house_number']
 
     db.session.commit()
-    return {'message': 'Address updated successfully'}
+
+    updated_address = {
+        'id': address.id,
+        'country_name': address.country_name,
+        'region_name': address.region_name,
+        'city_name': address.city_name,
+        'street_name': address.street_name,
+        'house_number': address.house_number
+    }
+
+    return updated_address
 
 
 def delete_address_dao(id):

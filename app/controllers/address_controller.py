@@ -13,8 +13,8 @@ def get_addresses():
 @app.route('/addresses', methods=['POST'])
 def add_address():
     data = request.get_json()
-    result = create_address(data)
-    return jsonify(result)
+    created_address = create_address(data)
+    return jsonify(created_address), 201
 
 
 @app.route('/addresses/<int:id>', methods=['PUT'])

@@ -13,7 +13,18 @@ def create_manufacturer_dao(data):
                                     email=data['email'], address_id=data['address_id'])
     db.session.add(new_manufacturer)
     db.session.commit()
-    return {'message': 'Manufacturer created successfully'}
+
+    new_manufacturer = {
+
+        'id': new_manufacturer.id,
+        'name': new_manufacturer.name,
+        'phone_number': new_manufacturer.phone_number,
+        'email': new_manufacturer.email,
+        'address_id': new_manufacturer.address_id
+
+    }
+
+    return new_manufacturer
 
 
 def update_manufacturer_dao(id, data):
@@ -27,7 +38,11 @@ def update_manufacturer_dao(id, data):
     manufacturer.address_id = data['address_id']
 
     db.session.commit()
-    return {'message': 'Manufacturer updated successfully'}
+
+    updated_manufacturer = {'id': manufacturer.id, 'name': manufacturer.name, 'phone_number': manufacturer.phone_number,
+                            'email': manufacturer.email, 'address_id': manufacturer.address_id}
+
+    return updated_manufacturer
 
 
 def delete_manufacturer_dao(id):

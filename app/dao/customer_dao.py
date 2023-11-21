@@ -13,7 +13,15 @@ def create_customer_dao(data):
                             phone_number=data.get('phone_number'))
     db.session.add(new_customer)
     db.session.commit()
-    return {'message': 'Customer created successfully'}
+
+    created_customer = {
+        'id': new_customer.id,
+        'first_name': new_customer.first_name,
+        'last_name': new_customer.last_name,
+        'phone_number': new_customer.phone_number
+    }
+
+    return created_customer
 
 
 def update_customer_dao(id, data):
@@ -26,7 +34,11 @@ def update_customer_dao(id, data):
     customer.phone_number = data.get('phone_number')
 
     db.session.commit()
-    return {'message': 'Customer updated successfully'}
+
+    updated_customer = {'id': customer.id, 'first_name': customer.first_name, 'last_name': customer.last_name,
+             'phone_number': customer.phone_number}
+
+    return updated_customer
 
 
 def delete_customer_dao(id):

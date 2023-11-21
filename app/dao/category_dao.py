@@ -11,7 +11,10 @@ def create_category_dao(data):
     new_category = Category(name=data['name'])
     db.session.add(new_category)
     db.session.commit()
-    return {'message': 'Category created successfully'}
+
+    created_category = {'name': new_category.name}
+
+    return created_category
 
 
 def update_category_dao(name, data):
@@ -21,7 +24,10 @@ def update_category_dao(name, data):
 
     category.name = data['name']
     db.session.commit()
-    return {'message': 'Category updated successfully'}
+
+    updated_category = {'name': category.name}
+
+    return updated_category
 
 
 def delete_category_dao(name):

@@ -7,7 +7,7 @@ from app.services.drug_service import get_all_drugs, create_drug, get_drug_by_id
 @app.route('/drugs', methods=['GET'])
 def get_drugs():
     drugs = get_all_drugs()
-    return jsonify({'drugs': drugs})
+    return jsonify(drugs)
 
 
 @app.route('/drugs', methods=['POST'])

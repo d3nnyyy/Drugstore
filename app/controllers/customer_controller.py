@@ -8,7 +8,7 @@ from app.services.customer_service import get_all_customers, create_customer, up
 @app.route('/customers', methods=['GET'])
 def get_customers():
     customers = get_all_customers()
-    return jsonify({'customers': customers})
+    return jsonify(customers)
 
 
 @app.route('/customers', methods=['POST'])

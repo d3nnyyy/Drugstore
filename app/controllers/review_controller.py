@@ -7,7 +7,7 @@ from app.services.review_service import get_all_reviews, create_review, update_r
 @app.route('/reviews', methods=['GET'])
 def get_reviews():
     reviews = get_all_reviews()
-    return jsonify({'reviews': reviews})
+    return jsonify(reviews)
 
 
 @app.route('/reviews', methods=['POST'])

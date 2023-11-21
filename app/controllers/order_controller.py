@@ -7,7 +7,7 @@ from app.services.order_service import get_all_orders, create_order, update_orde
 @app.route('/orders', methods=['GET'])
 def get_orders():
     orders = get_all_orders()
-    return jsonify({'orders': orders})
+    return jsonify(orders)
 
 
 @app.route('/orders', methods=['POST'])

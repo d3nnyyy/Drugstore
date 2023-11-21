@@ -8,7 +8,7 @@ from app.services.category_service import get_all_categories, create_category, u
 @app.route('/categories', methods=['GET'])
 def get_categories():
     categories = get_all_categories()
-    return jsonify({'categories': categories})
+    return jsonify(categories)
 
 
 @app.route('/categories', methods=['POST'])

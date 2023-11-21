@@ -8,7 +8,7 @@ from app.services.manufacturer_service import get_all_manufacturers, create_manu
 @app.route('/manufacturers', methods=['GET'])
 def get_manufacturers():
     manufacturers = get_all_manufacturers()
-    return jsonify({'manufacturers': manufacturers})
+    return jsonify(manufacturers)
 
 
 @app.route('/manufacturers', methods=['POST'])

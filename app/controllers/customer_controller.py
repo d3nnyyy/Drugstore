@@ -38,4 +38,4 @@ def get_orders_for_customer(id):
         return jsonify({'message': 'Customer not found'}), 404
 
     orders = customer['orders']
-    return jsonify({'customer': customer, 'orders': orders})
+    return jsonify(orders)

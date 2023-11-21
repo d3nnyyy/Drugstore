@@ -38,4 +38,4 @@ def get_drugs_by_category(name):
         return jsonify({'message': 'Category not found'}), 404
 
     drugs = category['drugs']
-    return jsonify({'category': category, 'drugs': drugs})
+    return jsonify(drugs)

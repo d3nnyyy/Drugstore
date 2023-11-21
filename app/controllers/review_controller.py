@@ -14,7 +14,7 @@ def get_reviews():
 def add_review():
     data = request.get_json()
     result = create_review(data)
-    return jsonify(result)
+    return jsonify(result), 201
 
 
 @app.route('/reviews/<int:id>', methods=['PUT'])

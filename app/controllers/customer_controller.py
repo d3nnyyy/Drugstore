@@ -15,7 +15,7 @@ def get_customers():
 def add_customer():
     data = request.get_json()
     result = create_customer(data)
-    return jsonify(result)
+    return jsonify(result), 201
 
 
 @app.route('/customers/<int:id>', methods=['PUT'])

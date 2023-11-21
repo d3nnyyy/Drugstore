@@ -15,7 +15,7 @@ def get_categories():
 def add_category():
     data = request.get_json()
     result = create_category(data)
-    return jsonify(result)
+    return jsonify(result), 201
 
 
 @app.route('/categories/<string:name>', methods=['PUT'])

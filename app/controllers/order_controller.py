@@ -14,7 +14,7 @@ def get_orders():
 def add_order():
     data = request.get_json()
     result = create_order(data)
-    return jsonify(result)
+    return jsonify(result), 201
 
 
 @app.route('/orders/<int:id>', methods=['PUT'])

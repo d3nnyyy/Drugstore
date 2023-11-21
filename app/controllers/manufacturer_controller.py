@@ -15,7 +15,7 @@ def get_manufacturers():
 def add_manufacturer():
     data = request.get_json()
     result = create_manufacturer(data)
-    return jsonify(result)
+    return jsonify(result), 201
 
 
 @app.route('/manufacturers/<int:id>/drugs', methods=['GET'])

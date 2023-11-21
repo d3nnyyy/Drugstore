@@ -7,7 +7,7 @@ from app.services.address_service import get_all_addresses, create_address, upda
 @app.route('/addresses', methods=['GET'])
 def get_addresses():
     addresses = get_all_addresses()
-    return jsonify({'addresses': addresses})
+    return jsonify(addresses)
 
 
 @app.route('/addresses', methods=['POST'])
